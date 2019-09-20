@@ -17,15 +17,14 @@ public class Num8104 {
 		int n = sc.nextInt(); // 조별당 인원 수 
 		int k = sc.nextInt(); // 조의 개수 
 		int result = 0;
-		int score = 0;
 		System.out.print("#"+test_case+" ");
 		if((n%2)==0) { // 짝수 
 			for(int i =1; i<=n; i+=2) {
 				result+=(2*i)*k;	
 			}//for end
-			score = result+(n/2);
+			result += (n/2);
 			for(int i=1; i<=k; i++) {
-				System.out.print(score+" ");
+				System.out.print(result+" ");
 			}
 		}else {
 			result = (n - 1)*((n - 1)*k + 1) / 2;
