@@ -18,7 +18,8 @@ public class Num8104 {
 		int k = sc.nextInt(); // 조의 개수 
 		int result = 0;
 		System.out.print("#"+test_case+" ");
-		if((n%2)==0) { // 짝수 
+		if((n%2)==0) { // 짝수
+			
 			for(int i =1; i<=n; i+=2) {
 				result+=(2*i)*k;	
 			}//for end
@@ -27,9 +28,11 @@ public class Num8104 {
 				System.out.print(result+" ");
 			}
 		}else {
-			result = (n - 1)*((n - 1)*k + 1) / 2;
-			result+= (n - 1)*k + 1;
-//			result = ((2*k)*(n-1))+((n-1)/2)+1;
+			
+			for(int i =2; i<=(n-1); i+=2) {
+				result+=(2*i)*k;
+			}//for end
+			result += (n/2)+1;
 			for(int i=0; i<k;i++) {
 				System.out.print(result+i+" ");
 			}
