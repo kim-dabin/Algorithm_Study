@@ -52,12 +52,8 @@ public class Calculator {
 
     public static int caculator(int[] An){
         int ret = 0;
-        int sum_ret=0;
-        int mult_ret = 0;
         for(int a : An){
-            sum_ret = ret+a;
-            mult_ret = ret*a;
-            ret = Math.max(sum_ret,mult_ret);
+            ret = Math.max(ret+a,ret*a);
         }
 
         return ret;
@@ -67,7 +63,6 @@ public class Calculator {
    /* public static int cal_plusOrMult(int[] An, int arr_idx,int res){
         //base case 계산 다함
 //        if(arr_idx)
-
 
         for(int i=0 ; i<2 ; i++){//더하기 or 곱하기
             int temp_res = res;
