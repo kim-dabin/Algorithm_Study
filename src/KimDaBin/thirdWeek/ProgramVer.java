@@ -12,7 +12,11 @@ public class ProgramVer {
 	private static int r,c ,mem;
 	private static boolean result;
 	public static void dfs(int dr, int dc, int dir) {
-		result=false;
+	       
+        if(result) {
+        	return;
+        }
+		
 		
 		if(dr == -1) dr = r-1;
         else if(dr == r) dr = 0; 
@@ -23,7 +27,8 @@ public class ProgramVer {
     
 		char ch = arr[dr][dc];
 //	 	System.out.println(dir);
-//		System.out.print(ch+" ");	
+		//System.out.print(ch+" ");	
+	
 			if(ch=='<') {//left dir
 				dir = 2;
 			}else if(ch=='^') {
@@ -41,7 +46,6 @@ public class ProgramVer {
 				dir= (mem==0)?1:3;
 			} else if(ch=='+') {
 				mem=(mem==15)?0:mem+1;
-				
 			} else if(ch=='-') {
 				mem=(mem==0?15:mem-1);			
 			}else if(ch>='0'&&ch<='9') {
@@ -54,7 +58,16 @@ public class ProgramVer {
 			else if(ch=='@') {//exit 
 				result=true;
 				return;
-			}else if(ch=='?') {
+			} 
+			if(visited[dr][dc][dir][mem]) {
+				result=false;
+				return;
+			}else {
+				visited[dr][dc][dir][mem] = true;
+			}
+			
+			
+			if(ch=='?') {
 				//dir=0;
 				char find=' ';
 				for(int i=0; i<4; i++) {
@@ -78,34 +91,20 @@ public class ProgramVer {
 					}
 						       
 			        if(x>=0&&x<r&&y>=0&&y<c) { 
-			        	dfs(x,y,i);
-			        	
-			        
+			        	dfs(x,y,i);        	
+			        	visited[x][y][i][mem] = false;
 			        }
-			        visited[x][y][i][mem] = false;
-			       
+			        
+			        
 				}
-			}
-			
-			
-		
-		
-			
-			if(ch!='?') {
-				if(visited[dr][dc][dir][mem]) {
-					result=false;
-					return;
-				}else {
-					visited[dr][dc][dir][mem] = true;
-				}
-				
-				
+			}else {
 				dfs(dr+row[dir],dc+col[dir],dir);
 			}
 			
-			//return;
+		
 			
-        }	
+        }
+ 
 		
 	 }
 	
@@ -124,7 +123,7 @@ public class ProgramVer {
 			String str = null;
 			visited = new boolean[r][c][4][16];//r,c,dir,mem size
 			arr = new char[r][c];
-			
+			result = false;
 			
 			for(int i=0; i<r; i++) {
 				str = br.readLine(); 
@@ -132,14 +131,11 @@ public class ProgramVer {
 					arr[i][j] = str.charAt(j);
 				}
 			}//for end 
-//			for(int i=0; i<r; i++) {
-//				for(int j=0; j<c;j++) {
-//					bw.append(arr[i][j]);
-//				}
-//				bw.append('\n');
-//			}//for end 
+
+			//bw.append("\n");
 			mem =0;
 			dfs(0, 0, 0);
+			
 			bw.append("#"+test_case+" "+(result?"YES":"NO")+"\n");
 						
 		}
