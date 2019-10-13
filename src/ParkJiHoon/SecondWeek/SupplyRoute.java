@@ -14,7 +14,6 @@ public class SupplyRoute {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         List<Integer> res_li = new ArrayList<>();
-
         int case_n  = Integer.parseInt(br.readLine());
         for(int i=0 ; i<case_n ; i++){
             int n  = Integer.parseInt(br.readLine());
@@ -24,7 +23,6 @@ public class SupplyRoute {
             for(int j=0 ;j<n ;j++) {
                 Arrays.fill(dp[j], 123456789);
             }
-
             for(int j=0;j<n;j++) {
                 String[] line = br.readLine().split("");
                 for(int k=0; k<n; k++){
@@ -33,29 +31,27 @@ public class SupplyRoute {
             }
             res_li.add(supply_route());
         }
-
         for(int i=1; i<=case_n;i++){
             System.out.println("#"+i+" "+res_li.get(i-1));
         }
-
     }
 
+
     public static int supply_route(){
-        int ret= 0 ;
+        int ret;
         Queue<Bridge> queue = new LinkedList<>();
         queue.offer(new Bridge(0,0,0));
-        ret = move(queue,0);
+        ret = move(queue);
         return ret;
     }
 
-    public static int move(Queue<Bridge> q, int sum){
 
+    public static int move(Queue<Bridge> q){
         while (!q.isEmpty()) {
             int i = q.peek().i;
             int j = q.peek().j;
             int nowCost = q.peek().cost;
             q.poll(); //맨앞에 빼냄
-
             for (int idx = 0; idx < 4; idx++) {
                 int next_x = j + dx[idx];
                 int next_y = i + dy[idx];
@@ -68,8 +64,9 @@ public class SupplyRoute {
             }
         }
         return dp[global_n-1][global_n-1];
-
     }
+
+
     private static class Bridge{
         int i,j,cost;
 

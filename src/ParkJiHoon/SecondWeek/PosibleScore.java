@@ -10,13 +10,12 @@ public class PosibleScore {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         List<Integer> res_li = new ArrayList<>();
-
         int case_n  = Integer.parseInt(br.readLine());
         for(int i=0 ; i<case_n ; i++){
             int n  = Integer.parseInt(br.readLine());
             String[] line = br.readLine().split(" ");
             HashMap<Integer, Integer> num_count = new HashMap<>();
-            for(int j=0; j<n ; j++){
+            for(int j=0; j<n ; j++){//{1:1, 2: 3, ..}
                 int num = Integer.parseInt(line[j]);
                 if(num_count.containsKey(num)) num_count.put(num, num_count.get(num)+1);
                 else num_count.put(num,1);
@@ -30,17 +29,16 @@ public class PosibleScore {
             System.out.println("#"+i+" "+res_li.get(i-1));
         }
     }
+
     private static int get_possible_score(HashMap<Integer,Integer> num_count){
         Iterator<Integer> it = num_count.keySet().iterator();
         List<Integer> nums ;
-
         while(it.hasNext()){//있으면
             nums = new ArrayList<>();
             int num = it.next();
             int count = num_count.get(num)+1;//0포함  +1
             for(int i=1; i<count;i++){
                 for(Integer n : res) nums.add(n+ num*i);
-
             }
             res.addAll(nums);
         }

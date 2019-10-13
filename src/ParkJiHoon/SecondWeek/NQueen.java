@@ -45,8 +45,6 @@ public class NQueen {
     public static boolean isSpotPossible(int i, int j){
         boolean ret = false;
         int count = 0;//좌우 한칸씩 이동
-
-
         while(i>=0 ){
             if(map[i][j] == 1) return ret;
 
