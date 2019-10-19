@@ -10,13 +10,11 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class Dummy {
-	private static int N,K,L,time;
+	private static int N,K,L;
 	private static int[][] map;
 	private static int[] row = {0,1,0,-1};
 	private static int[] col = {1,0,-1,-0};
-	private static int[][] check;
-	private static Stack<Integer> vx ;
-	private static Stack<Integer> vy;
+
 	private static Queue<Node> body;
 	private static String[] dir;
 
@@ -24,7 +22,6 @@ public class Dummy {
 		private int row;
 		private int col;
 		public Node() {
-			// TODO Auto-generated constructor stub
 		}
 		
 		public Node(int row, int col) {
@@ -34,9 +31,6 @@ public class Dummy {
 	}
 	
 	public static void dfs(int type, int dr, int dc, int t) {
-	
-		++time;
-	
 		if(dir[t].equals("D")) {
 
 			switch (type) {
@@ -100,12 +94,11 @@ public class Dummy {
 	}
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		vx = new Stack<>();
-		vy = new Stack<>();
+
 		N = Integer.parseInt(br.readLine());
 		body = new LinkedList<Node>();
 		map = new int[N+2][N+2];
-		time = 0;
+	
 		for(int i=0; i<N+2; i++) { //padding 
 			for(int j=0; j<N+2; j++) {
 				map[i][j]=-1;
@@ -138,7 +131,6 @@ public class Dummy {
 			}
 		}
 		
-		check = new int[N][N];
 		
 		dfs(0, 1, 1,0);
 		
